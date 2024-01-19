@@ -1,0 +1,129 @@
+
+@import 'variables';
+
+.bg-uasz-vert-1{
+    background-color: $uasz-vert-1 !important;
+}
+
+.btn.btn-uasz-1{
+    background-color: $uasz-vert-1 !important;
+    color: white !important;
+}
+
+.btn.btn-uasz-2{
+    background-color: $uasz-vert-2 !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.btn.btn-uasz-3{
+    background-color: $uasz-vert-3 !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.bg-uasz-vert-2{
+    background-color: $uasz-vert-2 !important;
+}
+
+.bg-uasz-vert-3{
+    background-color: $uasz-vert-3 !important;
+}
+
+.uasz-color-vert-1{
+    color: $uasz-vert-1 !important;
+}
+
+.uasz-color-vert-2{
+    color: $uasz-vert-2 !important;
+}
+
+.uasz-color-vert-3{
+    color: $uasz-vert-3 !important;
+}
+
+.uasz-title .separateur-left img,.uasz-title .separateur-right img{
+    width: 15%;
+}
+
+.uasz-title .title{
+    color: $uasz-vert-1  !important; 
+    text-transform: uppercase;
+    padding-left: 15px;
+    padding-right: 15px;
+    //position: absolute;
+}
+/*
+.uasz-title > h3::before{
+    content: "right  ";
+    color: white;
+    background-color: white;
+    background-image: url('../../img/logos/separ-right.jpg');
+    background-size: 100px;
+    background-repeat: no-repeat;
+}
+.uasz-title .separateur-right{
+    width: 100%; 
+    height: 100%; 
+    position: relative; 
+    transform: rotate(-180deg); 
+    transform-origin: 0 0
+}
+*/
+.uasz-navbar-rounded{
+    height: 80px;
+    background: $uasz-vert-1; 
+    border-top-left-radius: 191px;
+    font-size: 18px;
+    font-weight: bold;
+    padding-right: 15px;
+    
+}
+.uasz-navbar.bg-white:not(.navbar-transparent) a:not(.dropdown-item):not(.btn) {
+    color: white !important;
+}
+.dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus, .bootstrap-select .dropdown-menu.inner li a:hover, .bootstrap-select .dropdown-menu.inner li a:focus {
+    background-color: $uasz-vert-1;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    color: white !important;
+    text-decoration: none;
+    background-color: $uasz-vert-1;
+}
+
+a:hover, a:focus {
+    color: $uasz-vert-1 ;
+}
+a:hover {
+    color: $uasz-vert-1 ;
+    text-decoration: underline;
+}
+.uasz-navbar{
+   padding-left: 15px; 
+    margin:0 !important;
+    margin-left: auto;
+    padding: 0 !important;
+    background: white !important; 
+    box-shadow: 0px 0px 9px 2px rgba(0, 0, 0, 0.25)
+}
+.uasz-navbar .navbar-toggler .navbar-toggler-bar{
+    background-color: $uasz-vert-1;
+}
+.uasz-navbar .container-fluid{
+    margin-left: 15px !important; 
+    padding-left: 15px !important; 
+    padding-right: 0px !important;
+    margin-right: 0px !important;
+    padding-top: 0px;
+}
+.uasz-navbar-logo{
+   /* width: 90px !important; */
+    height: 80px !important; 
+}
+
+
+.wrapper .bottom-nav {
+    background-color: white !important;
+    padding-top: 80px;
+}
