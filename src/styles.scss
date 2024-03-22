@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200; 1 300;1 400;1 500;1 600;1 700;1 800;1 900&display=swap');*/
+
+@import 'bootstrap/scss/bootstrap';
+
+
+@import './assets/scss/my-styles/variables';
+*{
+    font-family: "Poppins";
+}
+// ------------------- MES BOUTONS -------------------- //
+#btnColor1{
+  background-color: $uasz-vert-1;
+  color: white;
+  width: auto;
+}
+#btnColor2{
+  background-color: $uasz-vert-2;
+  color: white;
+  width: auto;
+}
+// --------------------------------------------------- //
+#modal-title-default{
+  color:white;
+}
+#bg-navbar-main{
+    background-color: $uasz-vert-1 !important;
+}
+
+#titreLashu{
+  color: $uasz-vert-1 !important;
+  font-size: 17px;
+
+}
+#nav-link-text{
+    color: $uasz-vert-1 !important;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+#navbar-brand-imgUpdate{
+    max-width: 1.3rem;
+}
+
+
+.modal-header{
+  background-color: $uasz-vert-2;
+
+}
+

@@ -1,0 +1,53 @@
+<div class="Head">
+<div class="container">
+    <h2> ▶ Liste des articles</h2>
+  
+  <div class=" table-responsive">
+    <table class=" table align-items-center table-flush">
+    
+      <thead class=" thead-light ">
+        <tr>
+          <th class=" sort" data-sort="idArt" scope="col">IdArt</th>
+
+          <th class=" sort" data-sort="Titre" scope="col">Titre</th>
+
+          <th class=" sort" data-sort="Description" scope="col">Description</th>
+
+          <th class=" sort" data-sort="Date de publication" scope="col">
+            Date de publication
+          </th>
+
+          <th scope="sort" data-sort="Type D'article">Type D'article</th>
+
+          <th scope="sort" data-sort=" Visible ">Visible</th>
+
+          <th scope="sort" data-sort="Archivé"> Archivé</th> 
+
+          <th scope="sort" data-sort="Actions">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody class=" list" >
+        <tr *ngFor="let article of articles">
+
+          <td>{{ article.idArt }}</td>
+          <td>{{ article.titre }}</td> 
+          <td>{{ article.description }}</td>
+          <td>{{ article.date_pub }}</td>
+          <td>{{ article.typeArticle }}</td>
+          <td>{{ article.visible ? 'Oui' : 'Non' }}</td>
+          <td>{{ article.archive ? 'Oui' : 'Non' }}</td>
+          <td>
+            <i class="fa-solid fa-pen"></i> 
+            <br/>
+            <i class="fa-solid fa-trash"></i>
+          </td>
+          
+
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+  

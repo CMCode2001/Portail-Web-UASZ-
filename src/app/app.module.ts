@@ -17,12 +17,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ComponentsModule } from "./components/components.module";
 
 import { AppRoutingModule } from './app-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PartenairesService } from "./_services/partenaires.service";
+import { PartenairesModule } from "./pages/partenaires/partenaires.module";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent
+  
   ],
   imports: [
     BrowserAnimationsModule,
@@ -37,9 +42,11 @@ import { AppRoutingModule } from './app-routing.module';
     TagInputModule,
     PresentationModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
+    PartenairesModule
   ],
-  providers: [],
+  providers: [PartenairesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

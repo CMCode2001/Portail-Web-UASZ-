@@ -1,5 +1,5 @@
 <nav
-  class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white"
+  class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light"
   id="sidenav-main"
   (mouseover)="onMouseEnterSidenav()"
   (mouseout)="onMouseLeaveSidenav()"
@@ -9,10 +9,11 @@
     <div class="sidenav-header d-flex align-items-center">
       <a class="navbar-brand" [routerLink]="['/dashboards/dashboard']">
         <img
-          src="assets/img/brand/red.png"
-          class="navbar-brand-img"
+          src="assets/img/logos/logo.png"
+          style="max-width: 3rem; max-height: 3rem;"
+          class="navbar-brand-img" id="navbar-brand-imgUpdate"
           alt="..."
-        />
+        /> <b id="titreLashu"> UFR LASHU ADMIN</b>
       </a>
       <div class="ml-auto">
         <!-- Sidenav toggler -->
@@ -43,8 +44,9 @@
               class="nav-link"
             >
               <i class="ni {{ menuitem.icontype }}"></i>
-              <span class="nav-link-text">{{ menuitem.title }}</span>
+              <span class="nav-link-text" id="nav-link-text">{{ menuitem.title }}</span>
             </a>
+            
             <!--If it have a submenu-->
             <a
               data-toggle="collapse"

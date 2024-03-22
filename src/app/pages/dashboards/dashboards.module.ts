@@ -8,13 +8,15 @@ import { TooltipModule } from "ngx-bootstrap/tooltip";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 
 import { DashboardComponent } from "./dashboard/dashboard.component";
-import { AlternativeComponent } from "./alternative/alternative.component";
-
+//import { AlternativeComponent } from "./alternative/alternative.component";
 import { RouterModule } from "@angular/router";
 import { DashboardsRoutes } from "./dashboards.routing";
 
+
+
+
 @NgModule({
-  declarations: [DashboardComponent, AlternativeComponent],
+  declarations: [DashboardComponent ],
   imports: [
     CommonModule,
     ComponentsModule,
@@ -24,6 +26,6 @@ import { DashboardsRoutes } from "./dashboards.routing";
     BsDropdownModule.forRoot(),
     RouterModule.forChild(DashboardsRoutes)
   ],
-  exports: [DashboardComponent, AlternativeComponent]
+  exports: [DashboardComponent]
 })
 export class DashboardsModule {}

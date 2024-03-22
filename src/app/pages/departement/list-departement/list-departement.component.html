@@ -1,0 +1,126 @@
+<!-- MON FORMULAIRE DE DONNE -->
+<ng-template #classicDepartement let-c="close" let-d="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title " id="modal-title-default" >Ajouter un nouveau Département à LASHU</h6>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="d('Cross click')">
+          <span aria-hidden="true" style="color: white;"> × </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="partenaireForm" [formGroup]="partenaireForm" (ngSubmit)="ajoutDepartement()" >
+            <div class="form-group">
+            <label for="example-text-input" class="form-control-label">Nom Département </label>
+            <input class="form-control" type="text" placeholder="nom departement" id="example-text-input"
+                   name="libelleDept" formControlName="libelleDept">
+          </div>
+          <div class="form-group">
+            <label for="example-search-input" class="form-control-label">Description Département </label>
+            <input class="form-control" type="text" placeholder="description departement" id="example-text-input"
+                   name="descriptionDept" formControlName="descriptionDept">
+          </div>  
+          
+            <button class="btn" id="btnColor2">
+                Enregistrer
+            </button>
+            <button aria-label="Close" class="btn btn-secondary" type="button" (click)="c('Close click')">Annuler</button>
+        
+        </form>
+      </div>
+    </div>
+  </ng-template>
+
+<!-- MA LISTE DE DEPARTEMENT -->
+<div class=" header bg-danger pb-6" id="bg-navbar-main">
+    <div class=" container-fluid">
+      <div class=" header-body">
+        <div class=" row align-items-center py-4">
+          <div class=" col-lg-6 col-7">
+            <h6 class=" h2 text-white d-inline-block mb-0"> Departement de LASHU </h6>
+  
+            <nav
+              aria-label="breadcrumb"
+              class=" d-none d-md-inline-block ml-md-4"
+            >
+              <ol class=" breadcrumb breadcrumb-links breadcrumb-dark">
+                <li class=" breadcrumb-item">
+                  <a href="javascript:void(0)"> <i class=" fas fa-home"> </i> </a>
+                </li>
+  
+                <li class=" breadcrumb-item">
+                  <a href="javascript:void(0)"> liste </a>
+                </li>
+  
+                <li aria-current="page" class=" breadcrumb-item active">
+                  departement
+                </li>
+              </ol>
+            </nav>
+          </div>
+  
+          <div class=" col-lg-6 col-5 text-right">
+            <a class=" btn btn-sl " id ="btnColor2" (click)="open(classicDepartement)"> 
+                <i class="ni ni-fat-add"></i> Add Departement
+            </a>
+  
+            <!-- <a class=" btn btn-sm btn-neutral" href="javascript:void(0)">
+              Filters
+            </a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" container-fluid mt--6">
+    <div class=" row">
+      <div class=" col">
+        <div class=" card">
+          <div class=" card-header border-0">
+            <h3 class=" mb-0">Nos Départements </h3>
+          </div>
+  
+          <div class=" table-responsive" id="first-list">
+            <table class=" table align-items-center table-flush">
+              <thead class=" thead-light">
+                <tr>
+                  <th class=" sort" data-sort="id" scope="col">Id Departement </th>
+  
+                  <th class=" sort" data-sort="libelleDept "  scope="col"> Nom Departement </th>
+  
+                  <th class=" sort" data-sort="descriptionDept" scope="col"> Description  Departement </th>
+
+  
+                  <th scope="col" colspan="2">Actions</th>
+                </tr>
+              </thead>
+  
+              <tbody class=" list">
+                    <tr  *ngFor="let dept of departement ">
+    
+                        <td>  {{ dept.id }} </td>
+                        
+                        <td> {{dept.libelleDept}} </td>
+
+                        <td> {{dept.descriptionDept}}</td>
+
+                        <td>
+                            <i class="fas fa-pencil-alt solid text-success" 
+                            style="cursor: pointer;" 
+                            (click)="openEditDept(classicDepartement,dept.id)"></i> 
+                          </td>
+                          
+                        <td>
+                        
+                            <i class="fas fa-trash-alt text-danger" 
+                            style="cursor: pointer;" 
+                            (click)="deleteDept(dept)"></i>
+
+                        </td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

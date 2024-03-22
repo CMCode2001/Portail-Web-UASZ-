@@ -1,0 +1,34 @@
+{
+  "articles": [
+    {
+      "idArt": 1,
+      "titre": "Titre article 1",
+      "description": "Description article 1",
+      "typeArticle": "actualite",
+      "date_pub": "2023-11-14",
+      "visible": true,
+      "archive": false,
+      "imageCouverture": "image1.jpg"
+    },
+    {
+      "idArt": 2,
+      "titre": "Titre article 2",
+      "description": "Description article 2",
+      "typeArticle": "evenement",
+      "date_pub": "2023-12-01",
+      "visible": true,
+      "archive": false,
+      "imageCouverture": "image2.jpg"
+    },
+    {
+      "idArt": 3,
+      "titre": "Titre article 3",
+      "description": "Description article 3",
+      "typeArticle": "opportunite",
+      "date_pub": "2023-12-15",
+      "visible": true,
+      "archive": false,
+      "imageCouverture": "image3.jpg"
+    }
+  ]
+}

@@ -9,7 +9,7 @@ import { PresentationComponent } from "./pages/presentation/presentation.compone
 
 const routes: Routes = [
   {
-    path: "",
+    path: "/",
     redirectTo: "presentation",
     pathMatch: "full"
   },
@@ -25,6 +25,23 @@ const routes: Routes = [
         path: "dashboards",
         loadChildren: () => import('./pages/dashboards/dashboards.module').then(m => m.DashboardsModule)
 
+      },
+      {
+        path: "articles",
+        loadChildren: () => import('./pages/articles/articles.module').then(m => m.ArticlesModule)
+
+      },
+      {
+        path: "partenaires",
+        loadChildren: () => import('./pages/partenaires/partenaires.module').then(m => m.PartenairesModule)
+      },
+      {
+        path: "departement",
+        loadChildren: () => import('./pages/departement/departement.module').then(m => m.DepartementModule)
+      },
+      {
+        path: "statistique",
+        loadChildren: () => import('./pages/statistique/statistique.module').then(m => m.StatistiqueModule)
       },
       {
         path: "components",

@@ -1,0 +1,44 @@
+{
+  "partenaires": [
+    {
+      "id": "1",
+      "nomPart": "UASZ",
+      "logoPart": "https://adepme.sn/wp-content/uploads/2020/06/logg.png",
+      "descriptionPart": "Universite de l'Excellence",
+      "siteWebPart": "https://www.uasz.sn",
+      "actif": true
+    },
+    {
+      "id": "2",
+      "nomPart": "Free Africa ",
+      "logoPart": "https://www.free.sn/themes/freesn/assets/img/logo.png",
+      "descriptionPart": "Administration Cote Reseau ",
+      "siteWebPart": "https://www.free.sn/",
+      "actif": false
+    },
+    {
+      "id": "3",
+      "nomPart": "UCAD",
+      "logoPart": "https://upload.wikimedia.org/wikipedia/commons/8/87/Logo_ucad_2.png",
+      "descriptionPart": "FINANCEMENT ",
+      "siteWebPart": "https://www.ucad.sn",
+      "actif": true
+    },
+    {
+      "id": "4",
+      "nomPart": "Orange Senegal",
+      "logoPart": "https://www.orange.sn/sites/default/files/images/orange_logo.svg",
+      "descriptionPart": "Partenariat avec la Fibre Optique ",
+      "siteWebPart": "https://www.orange.sn/",
+      "actif": true
+    },
+    {
+      "id": "5",
+      "nomPart": "UGB",
+      "logoPart": "https://www.senpages.com/app/uploads/ugb-550x550-1.jpeg",
+      "descriptionPart": "FINANCEMENT ",
+      "siteWebPart": "https://www.ugb.sn",
+      "actif": false
+    }
+  ]
+}

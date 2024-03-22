@@ -1,12 +1,13 @@
 import { Component, OnInit, ElementRef } from "@angular/core";
-import { ROUTES } from "../sidebar/sidebar.component";
-import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
+
+import { Router, Event, NavigationStart, NavigationEnd, NavigationError} from '@angular/router';
 
 import {
   Location,
   LocationStrategy,
   PathLocationStrategy
 } from "@angular/common";
+import { ROUTES } from "src/app/variables/ROUTES";
 
 @Component({
   selector: "app-navbar",
@@ -54,9 +55,9 @@ export class NavbarComponent implements OnInit {
   }
   getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
-    if (titlee.charAt(0) === "#") {
+    /*if (titlee.charAt(0) === "#") {
       titlee = titlee.slice(1);
-    }
+    }*/
 
     for (var item = 0; item < this.listTitles.length; item++) {
       if (this.listTitles[item].path === titlee) {
