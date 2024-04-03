@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
@@ -20,13 +20,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PartenairesService } from "./_services/partenaires.service";
 import { PartenairesModule } from "./pages/partenaires/partenaires.module";
+import { PartenaireComponent } from './partenaire/partenaire.component';
+import { GuideAdminComponent } from './pages/guide-admin/guide-admin.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    PartenaireComponent,
+    GuideAdminComponent
   
   ],
   imports: [
@@ -44,6 +48,7 @@ import { PartenairesModule } from "./pages/partenaires/partenaires.module";
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    ReactiveFormsModule,
     PartenairesModule
   ],
   providers: [PartenairesService],

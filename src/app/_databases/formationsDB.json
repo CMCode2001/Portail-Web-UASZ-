@@ -1,0 +1,14 @@
+{
+  "formations": [
+    {
+      "id": "2",
+      "libelleFormation": "LM",
+      "descriptionFormation": "Lettres Modernes"
+    },
+    {
+      "id": "106",
+      "libelleFormation": "",
+      "descriptionFormation": ""
+    }
+  ]
+}

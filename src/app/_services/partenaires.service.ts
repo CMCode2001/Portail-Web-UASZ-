@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Partenaires } from '../_modèles/partenaires';
 
@@ -9,30 +9,34 @@ import { Partenaires } from '../_modèles/partenaires';
 })
 export class PartenairesService {
 
-  private apiUrl = 'http://localhost:3001/partenaires';
+  private apiUrl = `http://localhost:4002/partenaires`;
 
   constructor(private http: HttpClient) { }
+  headers = new HttpHeaders({
+    "Content-Type": "application/json", // Adjust this based on your server requirements
+    // Add any additional headers as needed
+  });
+
+  // Configure the HTTP options with headers
+  httpOptions = {
+    headers: this.headers,
+  };
 
 
   getPartenaires(): Observable<Partenaires[]> {
     return this.http.get<Partenaires[]>(this.apiUrl);
   }
 
-  getPartenairesById(id: number): Observable<Partenaires> {
-    return this.http.get<Partenaires>(`${this.apiUrl}/${id}`);
+  
+  createPartenaires(Partenaires: any): Observable<any> {
+    return this.http.post(this.apiUrl, Partenaires,this.httpOptions);
   }
 
-  createPartenaires(Partenaires: Partenaires): Observable<Partenaires> {
-    return this.http.post<Partenaires>(this.apiUrl, Partenaires);
-  }
+ 
 
-  // updateNomPart( partEdit: Partenaires): Observable<Partenaires> {
-  //   return this.http.patch<Partenaires>(`${this.apiUrl}/${partEdit.id}`,{nomPart:!partEdit.nomPart});
-  // }
-
-  updatePartenaire(partenaire: Partenaires): Observable<Partenaires> {
+  updatePartenaire(partenaire: any): Observable<any> {
     const mon_Url = `${this.apiUrl}/${partenaire.id}`;
-    return this.http.put<Partenaires>(mon_Url, partenaire);
+    return this.http.put<any>(mon_Url, partenaire);
   }
 
   deletePartenaires(id: number): Observable<any> {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { ROUTES } from "src/app/variables/ROUTES";
+import { ROUTES } from "ROUTES";
 
 var misc: any = {
   sidebar_mini_active: true

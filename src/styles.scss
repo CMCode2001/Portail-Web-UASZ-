@@ -14,13 +14,30 @@
   background-color: $uasz-vert-1;
   color: white;
   width: auto;
+  font-weight: 500;
 }
 #btnColor2{
   background-color: $uasz-vert-2;
   color: white;
   width: auto;
 }
+#btnColor3{
+  background-color: black;
+  color: rgb(255, 255, 255);
+  width: auto;
+}
+
 // --------------------------------------------------- //
+#my-datatable {
+  width: 100% !important; 
+ 
+}
+.datatable-scroll{
+  background-color: white !important;
+  color: black !important;
+  font-size: 16px !important; 
+}
+
 #modal-title-default{
   color:white;
 }

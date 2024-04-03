@@ -1,118 +1,129 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Departement } from 'src/app/_modèles/departement';
 import { DepartementService } from 'src/app/_services/departement.service';
-import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-list-departement',
   templateUrl: './list-departement.component.html',
-  styleUrls: ['./list-departement.component.scss']
 })
-export class ListDepartementComponent  implements OnInit{
-    private deptForm : FormGroup;
-    mesDept$ : Departement [] = [];
-    departement : Departement;
-  
-    constructor( private modal:NgbModal,
-      private deptService : DepartementService,
-      private _deptForm : FormBuilder,
-      private router: Router){
-  
-    }
-    ngOnInit(){
-      this.deptForm = this._deptForm.group({
-        libelleDept : this._deptForm.control(''),
-        descriptionDept : this._deptForm.control(''),
-        
-      });
-      this.getAllDepartement();
-    }
-    //MODAL OUVERTURE DU addDept
-    open(classicDepartement : any){
-      this.modal.open(classicDepartement, {centered: true}).result.then((result) => {
-        result = "Dialogue fermé";
-        this.deptForm.reset(); 
-      }, (raison) => { raison = "Fermé"; });
-    }
-    // openEditDept(editPartenaire ,idDep: number){
-    //   const modalRef = this.modal.open(editPartenaire, { centered:true });
-    //     console.log(idp);
-    //     const  = this.partenaires.find(partner => partner.id ===idp);
-    //     this.partenaireUpdate = partner;
-    //     this.partenaireForm.controls["nomPart"].setValue(partner.nomPart);
-    //     this.partenaireForm.controls["descriptionPart"].setValue(partner.descriptionPart);
-    // }
-  
-    // MES METHODES 
+export class ListDepartementComponent implements OnInit {
+  myForm : FormGroup;
+  Departement = [];
+  temp = []
 
-    
-    ajoutDepartement() {
-      let addDept:Departement = this.deptForm.value;
-      console.log(addDept);
-      
-      this.deptService.addDepartement(addDept).subscribe({        
-        next: (value)=> {
-            alert(JSON.stringify(value));
-        },
-        error : err =>{
-          console.log(err);
-          
-        }
-      })
-      // openEditPartenaire(editPartenaire ,idp: number) {
-        // Ouvrez la modal d'édition et pré-remplissez les champs avec les valeurs existantes du partenaire
+
+  constructor(
+    //private router: Router,
+    private fb : FormBuilder,
+    private modalService: NgbModal,
+    private _DepartementService: DepartementService
+  ) {
+    this.myForm = this.fb.group({
+      id: Math.floor(Math.random() * 10) + 100 + "",
+      libelleDept: "",
+      descriptionDept: "",
+    });
+    this.ngOnInit();
+    this.afficherLesDepartements();
+
+  }
+ 
+  ngOnInit() {
+    this.temp = this.Departement;
+
+  }
+  open(contenu):void{
+    this.modalService.open(contenu, { centered: true }).result.then((result) => {
+      result = "Dialogue fermé";
+    }, (raison) => { raison = "Fermé"; });  
+  }
+//   // =================DETAILS======================== //
+//   openDetailsModal(content: any, departement: any) {
+//     this.activeDept = departement; 
+//     this.modalService.open(content, { centered: true, size: 'lg' }); 
+//   }
+
+
+// ===========================ADD DEPARTEMENT ===================================== //
+
+ajouterDepartement(): void {
+
+    this._DepartementService.createDepartement(this.myForm.value).subscribe({
+      next: (reponse) => {
+        console.log(this.myForm.value);
+        console.log(reponse)
+        alert(`Departement: ${reponse.libelleDept} ajouté avec succès`);
+        this.Departement.push(this.myForm.value);
+        window.location.reload();
+        console.log("Donnee de la liste =================================");
+        this.myForm.reset(); 
+      },
+      error: (reponse) => {
+        console.log(reponse);
         
-        // this.partenaireForm.controls["siteWebPart"].setValue(partner.siteWebPart);
-        // this.partenaireForm.controls["logoPart"].setValue(partner.logoPart);
-        // this.partenaireForm.controls["actif"].setValue(partner.actif);
-      // if (this.deptForm.valid) {
-      //   this.deptService.addDepartement(this.deptForm.value).subscribe({
-      //     next: (nouveauDept) => {
-      //       alert("Département ajouté avec succès !");
-      //       this.mesDept$.push(nouveauDept); // Ajoutez le nouveau département à la liste
-      //       this.deptForm.reset(); // Réinitialisez le formulaire après soumission réussie
-      //       console.log(this.mesDept$);
-            
-      //       this.router.navigate(['/departement']);; // Redirigez l'utilisateur vers la page appropriée
-      //     },
-      //     error: (reponse) => {
-      //       alert("Erreur lors de l'ajout du département");
-      //     }
-      //   });
-      // }
-    }
-          
-    getAllDepartement(){
-      this.deptService.getDepartements().subscribe(
-        (data) => {
-          this.departement = data; 
+      }
+    });
+  this.myForm.reset();
+}
+// // ============================ GET ALL DEPARTEMENT ==================================== //
+  afficherLesDepartements():void {
+    this._DepartementService.getAllDepartements().subscribe(
+      (data) => {
+        this.Departement = data;
+        this.temp = data;
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+// ================================ UPDATE DEPARTEMENT ====================================== 
+
+// =================== CHARGEMENT DES DONNEES =========================//
+openEditModal(contenu: any, departement: any) {
+ 
+  this.myForm.patchValue({
+    id:departement.id,
+    libelleDept: departement.libelleDept,
+    descriptionDept: departement.descriptionDept
+  });
+  // Ouvrir le modal
+  this.modalService.open(contenu, { centered: true });
+}
+
+modifierDepartement() {
+      this._DepartementService.updateDepartement(this.myForm.value).subscribe({
+          next: (res) => {
+            alert("Departement modifié avec succès");
+            console.log(res);
+            window.location.reload();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      //console.log(this.departementForm.value);
+    }   
+
+ // =============================== DELETE DEPARTEMENT =======================================
+
+  suppressionDepartement(departement: any): void { 
+    const confirmation = window.confirm(`Êtes-vous sûr de vouloir supprimer le departement "${departement.libelleDept}" ?`);
+    if (confirmation) {
+    
+      this._DepartementService.deleteDepartement(departement.id).subscribe(
+        () => {
+        
+          this.Departement = this.Departement.filter(p => p.id !== departement.id);
+          console.log("Departement supprimé avec succès:", departement);
         },
         (error) => {
-          console.log(error);
-      });
-    }
-    
-    updateDept(classicDepartement,id: number){
-      
-    }
-  
-    deleteDept(suppDept :Departement){
-      const confirmation = window.confirm(`Êtes-vous sûr de vouloir supprimer le partenaire "${suppDept.libelleDept}" ?`);
-      if (confirmation) {
-      
-        this.deptService.deleteDepartement(suppDept.id).subscribe(
-          () => {
-            this.mesDept$ = this.mesDept$.filter(p => p.id !== suppDept.id);
-            console.log("Département supprimé avec succès :", suppDept);
-          },
-          (error) => {
-            console.log("Erreur lors de la suppression du departement:", error);
-          }
-        );
-      }
-  
+          console.log("Erreur lors de la suppression du departement:", error);
+        }
+      );
     }
   }
-  
+ // ============================================================================
+
+}
+

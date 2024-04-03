@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Article } from '../_modèles/Articles/articles';
 
 
 @Injectable({
@@ -9,29 +8,33 @@ import { Article } from '../_modèles/Articles/articles';
 })
 export class ArticleService {
 
-  private apiUrl = 'http://localhost:3000/articles';
+  private apiUrl = 'http://localhost:4001/articles';
+  
+  constructor(private _http: HttpClient) {}
+  headers = new HttpHeaders({
+    "Content-Type": "application/json", // Adjust this based on your server requirements
+    // Add any additional headers as needed
+  });
 
-  constructor(private http: HttpClient) { }
-
-
-
-  getArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.apiUrl);
+  // Configure the HTTP options with headers
+  httpOptions = {
+    headers: this.headers,
+  };
+  ajoutArticle(article: any): Observable<any> {
+    return this._http.post(this.apiUrl,article, this.httpOptions);
   }
 
-  getArticleById(id: number): Observable<Article> {
-    return this.http.get<Article>(`${this.apiUrl}/${id}`);
+  getAllArticles(): Observable<any> {
+    return this._http.get(this.apiUrl);
   }
 
-  createArticle(article: Article): Observable<Article> {
-    return this.http.post<Article>(this.apiUrl, article);
-  }
-
-  updateArticle(id: number, article: Article): Observable<Article> {
-    return this.http.put<Article>(`${this.apiUrl}/${id}`, article);
+  updateArticle(article: any): Observable<any> {
+    const mon_Url = `${this.apiUrl}/${article.id}`;
+    return this._http.put<any>(mon_Url, article);
   }
 
   deleteArticle(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this._http.delete(`${this.apiUrl}/${id}`);
   }
+  
 }

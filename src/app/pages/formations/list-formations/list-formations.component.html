@@ -1,0 +1,148 @@
+<!-- MON ENTETE -->
+<div class=" header bg-danger pb-6" id="bg-navbar-main">
+    <div class=" container-fluid">
+      <div class=" header-body"> 
+        <div class=" row align-items-center py-4">
+          <div class=" col-lg-6 col-7">
+            <h6 class=" h2 text-white d-inline-block mb-0"> Les Formations de LASHU </h6>
+  
+          </div>
+          <div class=" col-lg-6 col-5 text-right">
+            <button class=" btn btn-sl " id ="btnColor2" (click)="open(addFormation)"> 
+                <i class="ni ni-fat-add"></i> 
+                Add New Formation 
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!----------------------- FORMULAIRE D'AJOUT ------------------------------>
+  
+  <ng-template #addFormation let-c="close" let-d="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title " id="modal-title-default" >Ajouter une nouvelle Formation à LASHU</h6>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="d('Cross click')">
+          <span aria-hidden="true" style="color: white;"> × </span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form [formGroup]="myForm" >
+              <div class="form-group ">
+                <h4 for="example-text-input"> Nom Formation </h4>
+                    <input
+                      formControlName="libelleFormation"
+                      class="form-control"
+                      placeholder=" nom formation"
+                      type="text">
+              </div>
+                
+              <!-- <div class="form-group" >
+                <h4 for="example-search-input" >Description Formation</h4>
+                <textarea 
+                    formControlName="descriptionFormation"
+                    class="form-control" 
+                    placeholder=" description formation "  
+                    rows="5">
+                </textarea>
+              </div> -->
+        
+              <div class="d-flex justify-content-between">
+                    <button class="btn" id="btnColor2" type="submit" (click)="ajouterFormation()"> Enregistrer </button>
+                    <button class="btn btn-danger text-center" (click)="d('Cross click')" > Annuler </button>
+              </div>
+            </form>
+    </div>
+  </div>
+  </ng-template>
+  
+  
+  <!-- MA LISTE DE DONNEE -->
+  <div class=" container-fluid mt--6">
+    <div class=" row">
+      <div class=" col">
+        <div class=" card">
+          <div class=" card-header border-0">
+            <h3 class=" mb-0"> Nos Formations </h3>
+          </div>
+  
+          <div class=" table-responsive" id="first-list">
+            <table class=" table align-items-center table-flush">
+              <thead class=" thead-light">
+                <!-- HEADER TABLES -->
+                <tr>
+                  
+                  <th class=" sort" data-sort="nomPart "  scope="col">Nom Formation </th>
+  
+                  <th class=" sort" data-sort="descriptionPart" scope="col"> Description Formation </th>
+  
+              
+                  <th scope="col" colspan="3">Operations</th>
+                </tr>
+              </thead>
+              <!-- BODY TABLES -->
+              <tbody class=" list">
+                    <tr *ngFor="let formation of Formation">
+      
+                        <td> <b>{{ formation.libelleFormation }}</b> </td>
+                        <td> <b>{{ formation.descriptionFormation }}</b> </td>
+  
+                        <td>
+                            <i class="fas fa-pencil-alt solid text-success" 
+                            style="cursor: pointer;" 
+                            (click)="openEditModal(editFormation, formation)"
+                            ></i>
+                             &nbsp;                   
+                             &nbsp;                   
+                            <i class="fas fa-trash-alt text-danger" 
+                            style="cursor: pointer;" 
+                            (click)="suppressionFormation(formation)"></i>
+                       </td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- ---------------- FORMULAIRE D'EDITION  --------------------->
+    <ng-template #editFormation let-c="close" let-d="dismiss">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title " id="modal-title-default" >Modification de Formation </h6>
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="d('Cross click')">
+              <span aria-hidden="true" style="color: white;"> × </span>
+            </button>
+          </div>
+          <div class="modal-body">
+                <form [formGroup]="myForm" >
+                  <div class="form-group ">
+                    <h4 for="example-text-input"> Nom Formation </h4>
+                        <input
+                          formControlName="libelleFormation"
+                          class="form-control"
+                          type="text">
+                  </div>
+                    
+                  <div class="form-group" >
+                    <h4 for="example-search-input" >Description Formation</h4>
+                    <textarea 
+                        formControlName="descriptionFormation" 
+                        class="form-control" 
+                        rows="5">
+                    </textarea>
+                  </div>
+            
+                  <div class="d-flex justify-content-between">
+                        <button class="btn" id="btnColor2" type="submit" (click)="modifierFormation()"> Modifier </button>
+                        <button class="btn btn-danger text-center" > Annuler </button>
+                  </div>
+                </form>
+        </div>
+      </div>
+      </ng-template>

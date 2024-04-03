@@ -5,5 +5,6 @@ export class Partenaires{
     siteWebPart:string;
     logoPart:File;
     actif: boolean ;
+  imageBase64: any;
 
 }

@@ -1,0 +1,404 @@
+<div class=" header bg-success pb-6">
+    <div class=" container-fluid">
+        <div class=" header-body">
+            <div class=" row align-items-center py-4">
+                <div class=" col-lg-6 col-7">
+                    <h6 class=" h2 text-white d-inline-block mb-0">Selectionner
+                        un partenaire
+                        pour l'administrer</h6>
+
+                    <nav
+                        aria-label="breadcrumb"
+                        class=" d-none d-md-inline-block ml-md-4">
+
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class=" container-fluid mt--6">
+    <div class=" row">
+        <div class=" col-lg-6">
+            <div class=" card-wrapper">
+                <div class=" card">
+                    <div class=" card-header"><h3 class=" mb-0">Gestion des
+                            Partenaires
+                        </h3>
+                        <div class="d-flex justify-content-center">
+                            <button
+                                class="btn btn-icon btn-3 btn-success "
+                                (click)="openDialogue(classic3)"
+                                type="button">
+                                <span class="btn-inner--icon"><i
+                                        class="ni ni-bag-17"></i></span>
+                                <span class="btn-inner--text">Ajouter
+                                    Partenaire</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="dataTables_wrapper py-4">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length"
+                                id="datatable_length">
+                                <label>
+                                    Montrer
+                                    <select
+                                        name="datatable_length"
+                                        aria-controls="datatable"
+                                        class="form-control form-control-sm"
+                                        (change)="entriesChange($event)">
+                                        <option value="5"
+                                            [selected]="entries==5">5</option>
+                                        <option value="10"
+                                            [selected]="entries==10">10</option>
+                                        <option value="25"
+                                            [selected]="entries==25">25</option>
+                                        <option value="50"
+                                            [selected]="entries==50">50</option>
+                                        <option value="-1"
+                                            [selected]="entries==-1">All</option>
+                                    </select>
+                                    entries
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div id="datatable_filter"
+                                class="dataTables_filter">
+                                <label>
+                                    <input
+                                        type="search"
+                                        class="form-control form-control-sm"
+                                        placeholder="Rechercher un partenaire"
+                                        aria-controls="datatable"
+                                        (keyup)="filterTable($event)" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <!-- <ngx-datatable
+                            id="print-section"
+                            class="bootstrap selection-cell"
+                            [headerHeight]="'auto'"
+                            [footerHeight]="'auto'"
+                            [rowHeight]="'auto'"
+                            [selectionType]="'single'"
+                            [limit]="entries != -1 ? entries:undefined"
+                            [rows]="temp"
+                            (activate)="onActivate($event)">
+
+                            <ngx-datatable-column
+                                name="id"
+                                [width]="100"></ngx-datatable-column>
+                            <ngx-datatable-column
+                                name="siteWeb"
+                                [width]="500"></ngx-datatable-column>
+
+                            <ngx-datatable-column
+                                name="nom"
+                                [width]="400"></ngx-datatable-column>
+
+                        </ngx-datatable> -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class=" col-lg-6">
+            <div class=" card-wrapper">
+                <!-- <div class=" card"> -->
+                <div class=" card-header"><h3 class=" mb-0">Detail du
+                        partenaire</h3></div>
+                <div class=" card-body">
+                    <form>
+                        <div class=" row">
+                            <div
+                                class=" col-md-6 d-flex justify-content-center">
+                                <button class="fas fa-trash btn btn-danger"
+                                    *ngIf="activeRow"
+                                    (click)="supprimer(activeRow.id)">Supprimer
+                                    le partenaire</button>
+                            </div>
+                            <div
+                                class=" col-md-6 d-flex justify-content-center">
+                                <button class="fas fa-trash btn btn-primary"
+                                    *ngIf="activeRow"
+                                    [routerLink]="['/updatepartenaire']"
+                                    (click)="openDialogueModif(classic4)">Modifier
+                                    le partenaire</button>
+                            </div>
+
+                            <div class=" col-md-6">
+
+                            </div>
+                        </div>
+
+                        <!-- </div> -->
+                    </form>
+                </div>
+                <!-- </div> -->
+
+                <div class=" card">
+                    <div class=" card-header"><h3 class=" mb-0">Nom du
+                            partenaire :<b> {{ activeRow ?
+                                activeRow.nom.toString() :
+                                'Rien n\'est selectionne' }}</b>
+                        </h3>
+
+                    </div>
+
+                    <div class=" card">
+
+                        <!-- <h2> </h2> -->
+
+                        <div class=" card-body col-lg-6">
+                            <img *ngIf="activeRow"
+                                [src]="activeRow.logo"
+                                width="630" height="400"
+                                alt="Image de Couverture">
+
+                        </div>
+
+                        <div class=" card-body">
+
+                            <form *ngIf="activeRow">
+
+                                <p>
+                                    <span
+                                        style="font-size:larger;font-style: oblique;font-weight: bold;">Actif
+                                        ?</span>
+                                    <span>
+                                        <label
+                                            class="custom-toggle custom-toggle-success mr-1">
+                                            <input
+                                                [(ngModel)]="activeRow.actif"
+                                                type="checkbox"
+                                                name="archive" />
+                                            <span
+                                                class="custom-toggle-slider rounded-circle"
+                                                data-label-off="Non"
+                                                data-label-on="Oui"></span>
+                                        </label>
+                                    </span>
+
+                                    &nbsp;&nbsp;&nbsp;
+
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div *ngIf="activeRow" class=" card">
+                        <div class=" card-header"><h3
+                                class=" mb-0">Description du
+                                partenaire</h3>
+                        </div>
+                        <!-- 
+                        <div class=" card-body" id="quill"
+                            data-toggle="quill">
+                          
+                        </div> -->
+                        <div style="border-radius: 2px;border: solid;"
+                            [innerHTML]="activeRow.description"></div>
+
+                        <!-- <div></div> -->
+                    </div>
+                    <!-- m -->
+
+                </div></div>
+
+        </div>
+    </div>
+</div>
+
+<ng-template #classic3 let-c="close" let-d="dismiss">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title" id="modal-title-default">Ajout
+                Partenaire</h6>
+            <button type="button" class="close" data-dismiss="modal"
+                aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="myForm">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1"
+                        class="form-label">Nom </label>
+                    <input type="email" class="form-control"
+                        id="prenom"
+                        aria-describedby="emailHelp"
+                        formControlName="nomPart">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1"
+                        class="form-label">Site Web </label>
+                    <input type="email" class="form-control"
+                        id="nom" formControlName="siteWebPart"
+                        aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <span
+                        style="font-size:larger;font-style: oblique;font-weight: bold;">Actif
+                        ?</span>
+                    <span>
+                        <label
+                            class="custom-toggle custom-toggle-success mr-1">
+                            <input
+                                type="checkbox"
+                                formControlName="actif" />
+                            <span
+                                class="custom-toggle-slider rounded-circle"
+                                data-label-off="Non"
+                                data-label-on="Oui"></span>
+                        </label>
+                    </span>
+                </div>
+                <div class=" dropzone dropzone-single mb-3"
+                    id="dropzone-single">
+                    <div class=" fallback">
+                        <div class=" custom-file">
+                            <input
+                                class=" custom-file-input"
+                                formControlName="logoPart"
+                                id="imageCouverture"
+                                type="file"
+                                (change)="onFileSelected($event)"
+                                accept="image/*" />
+
+                            <label class=" custom-file-label"
+                                for="projectCoverUploads">
+                                Choisisr Logo
+                            </label>
+                        </div>
+                    </div>
+                    <img *ngIf="imageBase64" [src]="imageBase64"
+                        [style.width.%]=20 alt="Uploaded Image">
+                </div>
+
+                <div class=" card">
+                    <div class=" card-header">
+                        <h3 class=" mb-0">Description du Partenaire</h3>
+                    </div>
+                    <textarea formControlName="descriptionPart"
+                        [style]="{height: '200px'}" cols="30"
+                        rows="10"></textarea>
+
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                data-dismiss="modal"
+                (click)="c('Close click')">Fermer</button>
+            <button type="button"
+                class="btn btn-primary"
+                (click)="ajouterPartenaire()">Enregistrer
+            </button>
+        </div>
+    </div>
+</ng-template>
+<ng-template #classic4 let-c="close" let-d="dismiss">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title" id="modal-title-default">Modification du
+                Partenaire</h6>
+            <button type="button" class="close" data-dismiss="modal"
+                aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="myForm">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1"
+                        class="form-label">Nom </label>
+                    <input type="email" class="form-control"
+                        [(ngModel)]="activeRow.nom"
+                        aria-describedby="emailHelp"
+                        formControlName="nom">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1"
+                        class="form-label">Site Web </label>
+                    <input type="email" class="form-control"
+                        formControlName="siteWeb"
+                        [(ngModel)]="activeRow.siteWeb"
+                        aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <span
+                        style="font-size:larger;font-style: oblique;font-weight: bold;">Actif
+                        ?</span>
+                    <span>
+                        <label
+                            class="custom-toggle custom-toggle-success mr-1">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="activeRow.actif"
+                                formControlName="actif" />
+                            <span
+                                class="custom-toggle-slider rounded-circle"
+                                data-label-off="Non"
+                                data-label-on="Oui"></span>
+                        </label>
+                    </span>
+                </div>
+                <div class=" dropzone dropzone-single mb-3">
+                    <div class=" fallback">
+                        <div class=" custom-file">
+                            <input
+                                class=" custom-file-input"
+                                formControlName="logo"
+                                [(ngModel)]="activeRow.logo"
+                                type="file"
+                                (change)="onFileSelected($event)"
+                                accept="image/*" />
+
+                            <label class=" custom-file-label"
+                                for="projectCoverUploads">
+                                Choisisr Logo
+                            </label>
+                        </div>
+                    </div>
+
+                    <img *ngIf="imageBase64" [src]="imageBase64"
+                        [style.width.%]=20 alt="Uploaded Image">
+
+                </div>
+
+                <div class=" card">
+                    <div class=" card-header">
+                        <h3 class=" mb-0">Description du Partenaire</h3>
+                    </div>
+                    <textarea formControlName="description"
+                        [(ngModel)]="activeRow.description"
+                        [style]=" {height: '200px'}" cols="30"
+                        rows="10"></textarea>
+
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                data-dismiss="modal"
+                (click)="c('Close click')">Fermer</button>
+            <button type="button"
+                class="btn btn-primary"
+                (click)="modifierPartenaire()">Enregistrer
+            </button>
+        </div>
+    </div>
+</ng-template>

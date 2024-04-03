@@ -1,40 +1,24 @@
 {
   "departements": [
     {
-      "id": "1",
-      "libelleDept": "Informatique",
-      "descriptionDept": "Département d'informatique chargé de la gestion des systèmes d'information."
-    },
-    {
       "id": "2",
       "libelleDept": "Art et Civilisation",
-      "descriptionDept": "Département de Histoire responsable de la promotion des arts et civilisations de l'afrique."
+      "descriptionDept": "Département d' Histoire responsable de la promotion des arts et civilisations de l'Afrique."
     },
     {
-      "id": "3",
-      "libelleDept": "Ressources Humaines",
-      "descriptionDept": "Département des ressources humaines chargé de la gestion du personnel et des relations employés."
+      "id": "102",
+      "libelleDept": "Lettres Modernes",
+      "descriptionDept": "Département Lettres Modernes"
     },
     {
-      "id": "4",
-      "libelleDept": "Finance",
-      "descriptionDept": "Département financier responsable de la gestion des finances de l'entreprise."
+      "id": "102",
+      "libelleDept": "Histoire",
+      "descriptionDept": "Département Histoire"
     },
     {
-      "id": "5",
-      "libelleDept": "Production",
-      "descriptionDept": "Département de production chargé de la fabrication des produits de l'entreprise."
-    },
-    {
-      "id": "6",
-      "libelleDept": "Production",
-      "descriptionDept": "Département de production chargé de la fabrication des produits de l'entreprise."
-    },
-    {
-      "id": "7",
-      "libelleDept": "Production",
-      "descriptionDept": "Département de production chargé de la fabrication des produits de l'entreprise."
+      "id": "102",
+      "libelleDept": "Langue Étrangère Appliquée ",
+      "descriptionDept": "Département Langue Étrangère Appliquée "
     }
-    
   ]
 }

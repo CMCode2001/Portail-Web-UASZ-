@@ -1,0 +1,178 @@
+<!-- MON ENTETE -->
+<div class=" header bg-danger pb-2" id="bg-navbar-main">
+    <div class=" container-fluid">
+      <div class=" header-body">
+        <div class=" row align-items-center py-4">
+          <div class=" col-lg-6 col-7">
+            <h3 class=" h2 text-white d-inline-block mb-0">  Liste des Articles  </h3>
+          </div>
+          <div class=" col-lg-6 col-5 text-right">
+            <a class=" btn btn-sl " id ="btnColor2" 
+            href ='/#/articles/articles' > 
+                <i class="ni ni-fat-add"></i> 
+                 Add New Article
+            </a>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- MA LISTE DATATABLE -->
+<div class=" container-fluid ">
+    <div class=" row">
+                <div class="dataTables_wrapper py-4">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length"
+                                id="datatable_length">
+                                <label style="color: black;">
+                                    Afficher les
+                                    <select
+                                        name="datatable_length"
+                                        aria-controls="datatable"
+                                        class="form-control form-control-sm"
+                                        (change)="entriesChange($event)">
+                                        <option value="5"
+                                            [selected]="entries==5">5</option>
+                                        <option value="10"
+                                            [selected]="entries==10">10</option>
+                                        <option value="25"
+                                            [selected]="entries==25">25</option>
+                                        <option value="50"
+                                            [selected]="entries==50">50</option>
+                                        <option value="-1"
+                                            [selected]="entries==-1">All</option>
+                                    </select>
+                                    premieres
+                                </label>
+                            </div>
+                        </div>
+                        <div >
+                            <!-- class="col-sm-12 col-md-6" -->
+                            <div id="datatable_filter"
+                                class="dataTables_filter">
+                                <label>
+                                    <input
+                                        type="search"
+                                        class="form-control form-control-sm"
+                                        placeholder="Rechercher un article"
+                                        aria-controls="datatable"
+                                        (keyup)="filterTable($event)" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div >
+                            <ngx-datatable 
+                                id=" my-datatable"
+                                class="bootstrap selection-cell "
+                                [headerHeight]="'auto'"
+                                [style]="'color:green'"
+                                [footerHeight]="'auto'"
+                                [rowHeight]="'auto'"
+                                [columnMode]="'standard'"
+                                (activate)="onActivate"
+                                [limit]="entries != -1 ? entries:undefined"
+                                [rows]="temp"
+                                >
+
+                                <!-- <ngx-datatable-column
+                                    name="id"
+                                    [width]="100">
+                                </ngx-datatable-column> -->
+
+                                <ngx-datatable-column
+                                    name="titre"
+                                    [width]="600">
+                                </ngx-datatable-column>
+
+                                <ngx-datatable-column
+                                    name=" datepub"
+                                    [width]="200">
+                                </ngx-datatable-column>
+
+                                <ngx-datatable-column
+                                    name="Opérations"
+                                    [width]="200"
+                                    [sortable]="false"
+                                    [canAutoResize]="false"
+                                    [resizeable]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <button 
+                                        class="btn btn-sm" 
+                                        id="btnColor3"  
+                                        (click)="openEditModal(k, row)"> Modifier </button>
+                                    </ng-template>
+                                </ngx-datatable-column>
+
+                                <ngx-datatable-column
+                                    name="Details"
+                                    [width]="200"
+                                    [sortable]="false"
+                                    [canAutoResize]="false"
+                                    [resizeable]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <button 
+                                        class="btn btn-sm" 
+                                        id="btnColor2"  
+                                        (click)="openDetailsModal(detailsModal, row)">
+                                            Détails
+                                        </button>
+                                    </ng-template>
+                                </ngx-datatable-column>
+
+                            </ngx-datatable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      
+
+<!-- ===================================================== -->
+<!-- MON MODAL DE DETAIL -->
+<ng-template #detailsModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" style="color: white;"> ▶ Détails de  {{ activeArticle?.titre }}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <!-- Colonne pour l'image -->
+            <div class="col-md-4">
+                <h6 style="color: black;"> ▶ Image de Couverture</h6>
+                <div class="overflow-hidden border border-secondary" style="width: 10rem; ">
+                    <img [src]="activeArticle?.imageCouverture" alt="Image de couverture" class="w-100 h-auto">
+                </div>
+            </div>
+           
+            <div class="col-md-8">
+                <h6 style="color: black;"> ▶ Type d'Article :
+                    &nbsp;&nbsp;&nbsp;
+                    <i> {{ activeArticle?.typeArticle.libelle }}</i>
+                </h6>
+                <div>
+                    <input type="checkbox" id="archiveToggle" [(ngModel)]="activeArticle.archive">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="archiveToggle" style="color: black;"> Archive</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="visibleToggle" [(ngModel)]="activeArticle.visible">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="visibleToggle" style="color: black;"> Visible</label>
+                </div>
+                <h6 style="color: black;"> ▶ Description :</h6>
+                <p> {{ activeArticle?.description }}</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="suppressionArticle(activeArticle.id)">Supprimer l'article</button>
+        </div>
+    </div>
+</ng-template>
+

@@ -8,7 +8,6 @@ import { PartenairesService } from 'src/app/_services/partenaires.service';
 @Component({
   selector: 'app-list-partenaires',
   templateUrl: './list-partenaires.component.html',
-  styleUrls: ['./list-partenaires.component.scss']
 })
 export class ListPartenairesComponent implements OnInit{
   partenaireUpdate:Partenaires | undefined;
@@ -24,38 +23,48 @@ export class ListPartenairesComponent implements OnInit{
     ) {
       // Initialisez le formulaire avec les données du partenaire
       
-    
+      this.partenaireForm = this._fb.group({
+        id :Math.floor(Math.random() * 10) + 100 + "",
+        nomPart: "",
+        descriptionPart: "" ,
+        siteWebPart: "",
+        logoPart: "",
+        actif: true
+      });
     }
-/*
-    onSubmit() {
-      if (this.partenaireForm.valid) {
-        const editedPartenaire = { ...this.partenaire, ...this.partenaireForm.value };
-        // Envoyez le partenaire édité au service pour mise à jour dans la base de données
-        this.partService.updatePartenaire(editedPartenaire).subscribe(() => {
-          // Fermez le formulaire d'édition après la mise à jour
-          //this.modal.dismissAll();
-        });
-      }
-    }*/
-    
-  ngOnInit() {
+// ======================== RESOLUTION D'IMAGE ==========================//
 
-    this.partenaireForm = this._fb.group({
-      nomPart: ['', Validators.required],
-      descriptionPart: ['', Validators.required],
-      siteWebPart: ['', Validators.required],
-      logoPart: ['', Validators.required],
-      actif: [true]
-    });
+imageBase64: string | ArrayBuffer | null = null;
 
-    this.getPartenaires();
+onFileSelected(event: any) {
+  const file: File = event.target.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = (e: any) => {
+    this.imageBase64 = e.target.result;
+  };
 
+  reader.readAsDataURL(file);
+}
+// =====================================================================//
 
+// ------ MON MODAL -------//
+  open(classicPartenaire: any) {
+    this.modal.open(classicPartenaire, { centered: true }).result.then((result) => {
+      result = "Dialogue fermé";
+      this.partenaireForm.reset(); 
+    }, (raison) => { raison = "Fermé"; });
+  }
+// =====================================================================//
+
+ngOnInit() {
+    this.getAllPartenaires();
   }
 
+// =====================================================================//
 
-//RECUPERATION DES DONNEES A TRAVERS LE SERVICE/
-  getPartenaires(): void {
+//---- AFFICHER TOUS LES PARTENAIRES ----//
+  getAllPartenaires(): void {
     this.partService.getPartenaires().subscribe(
       (data) => {
         this.partenaires = data; 
@@ -64,53 +73,38 @@ export class ListPartenairesComponent implements OnInit{
         console.log(error);
   });
   } 
-  ajoutPartenaire() {
-    if (this.partenaireForm.valid) {
+
+// =====================================================================//
+
+//---- AJOUTER UN PARTENAIRE ----//
+
+  ajoutPartenaire(): void {
+    console.log("debugu--======================================================");
+    console.log(this.partenaireForm.value);
+    console.log("debugu--======================================================");
+
+      this.partenaireForm.value.logoPart = this.imageBase64;
       this.partService.createPartenaires(this.partenaireForm.value).subscribe({
         next: (reponse) => {
+          console.log(this.partenaireForm.value);
+          console.log(reponse)
           alert("Partenaire ajouté avec succès...! ");
+          window.location.reload();
           this.partenaires.push(this.partenaireForm.value);
-          this.partenaireForm.reset(); // Réinitialise le formulaire après soumission réussie
+          console.log("Donnee de la liste =================================");
+          console.log(this.partenaires);
+          this.partenaireForm.reset(); 
         },
         error: (reponse) => {
           alert("Erreur lors de l'ajout du partenaire ")
         }
       });
-    }
-  }
-  
-  open(classicPartenaire: any) {
-    this.modal.open(classicPartenaire, { centered: true }).result.then((result) => {
-      result = "Dialogue fermé";
-      this.partenaireForm.reset(); 
-    }, (raison) => { raison = "Fermé"; });
-  }
-  
-  // ----------------------------//
- 
-
-  RecupDonnePartenaire() {
-    const formValue = this.partenaireForm.value;
-    const partenaires: Partenaires = {
-      id: null,
-      nomPart: formValue.nomPart,
-      descriptionPart: formValue.descriptionPart,
-      siteWebPart: formValue.siteWebPart,
-      logoPart: formValue.logoPart,
-      actif: formValue.actif
-    };
-    this.partService.createPartenaires(partenaires).subscribe((newPart: Partenaires) => {
-      // Ajouter le nouveau partenaire à la liste existante
-      this.partenaires.push(newPart);
-      // Réinitialiser le formulaire après soumission
-      this.partenaireForm.reset();
-    });
+    this.partenaireForm.reset();
   }
 
+// =====================================================================//
 
-  //LES OPERATIONS DE PUT & DELETE
-
-
+//---- SUPRESSION DU PARTENAIRE ----//
   deletePartenaire(partenaire: Partenaires): void {
     
     const confirmation = window.confirm(`Êtes-vous sûr de vouloir supprimer le partenaire "${partenaire.nomPart}" ?`);
@@ -128,23 +122,49 @@ export class ListPartenairesComponent implements OnInit{
       );
     }
   }
- 
 
-  //---- EDITION DE PARTENAIRE ----//
-   // Fonction pour ouvrir le formulaire d'édition avec les données du partenaire sélectionné
-   
-   openEditPartenaire(editPartenaire ,idp: number) {
-    // Ouvrez la modal d'édition et pré-remplissez les champs avec les valeurs existantes du partenaire
-    const modalRef = this.modal.open(editPartenaire, { centered:true });
-    console.log(idp);
-    const partner = this.partenaires.find(partner => partner.id ===idp);
-    this.partenaireUpdate = partner;
-    this.partenaireForm.controls["nomPart"].setValue(partner.nomPart);
-    this.partenaireForm.controls["descriptionPart"].setValue(partner.descriptionPart);
-    this.partenaireForm.controls["siteWebPart"].setValue(partner.siteWebPart);
-    this.partenaireForm.controls["logoPart"].setValue(partner.logoPart);
-    this.partenaireForm.controls["actif"].setValue(partner.actif);
-    //modalRef.componentInstance.partenaire = partner; // Passer le partenaire sélectionné à la modal
+// =====================================================================//
+openDialogue(contenu) {
+  this.modal.open(contenu, { centered: true }).result.then(
+    (result) => {
+     "Closed with: $result";
+    },
+    (reason) => { "Dismissed $this.getDismissReason(reason)";
+    }
+  );
+}
+
+//---- ========== MODIFICATION DE PARTENAIRE =============----//
+// =================== CHARGEMENT DES DONNEES =========================//
+openEditModal(contenu, partenaire: Partenaires) {
+  this.partenaireForm.value.logoPart = this.imageBase64;
+  this.partenaireForm.patchValue({
+    id:partenaire.id,
+    nomPart: partenaire.nomPart,
+    descriptionPart: partenaire.descriptionPart,
+    siteWebPart: partenaire.siteWebPart,
+    logoPart: partenaire.logoPart,
+    actif: partenaire.actif
+  });
+
+  // Ouvrir le modal
+  this.modal.open(contenu, { centered: true });
+}
+
+//====================================================//
+modifierPartenaire() {
+    this.partenaireForm.value.logoPart = this.imageBase64;
+    this.partService.updatePartenaire(this.partenaireForm.value).subscribe({
+        next: (res) => {
+          alert("Partenaire modifié avec succès");
+          console.log(res);
+          window.location.reload();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     console.log(this.partenaireForm.value);
-  }
+    this.partenaireForm.reset();
+  }   
 }

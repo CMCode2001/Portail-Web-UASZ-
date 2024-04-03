@@ -7,7 +7,7 @@ import {
   LocationStrategy,
   PathLocationStrategy
 } from "@angular/common";
-import { ROUTES } from "src/app/variables/ROUTES";
+import { ROUTES } from "ROUTES";
 
 @Component({
   selector: "app-navbar",

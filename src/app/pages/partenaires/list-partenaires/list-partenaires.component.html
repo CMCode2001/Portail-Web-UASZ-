@@ -1,57 +1,5 @@
-<!-- MON FORMULAIRE -->
-<ng-template #classicPartenaire let-c="close" let-d="dismiss">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h6 class="modal-title " id="modal-title-default" >Ajouter un nouveau Partenaire à LASHU</h6>
-        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="d('Cross click')">
-          <span aria-hidden="true" style="color: white;"> × </span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form name="partenaireForm" [formGroup]="partenaireForm" (ngSubmit)="ajoutPartenaire()" >
-            <div class="form-group">
-            <label for="example-text-input" class="form-control-label">Nom Partenaire</label>
-            <input class="form-control" type="text" placeholder="Nom partenaire" id="example-text-input"
-                   name="nomPart" formControlName="nomPart">
-          </div>
-             
-          <div class="form-group">
-            <label for="example-search-input" class="form-control-label">Description</label>
-            <textarea class="form-control" placeholder="Description" id="example-text-input" name="descriptionPart" formControlName="descriptionPart" rows="4"></textarea>
-        </div>
-        
-        
-          <div class="form-group">
-            <label for="example-email-input" class="form-control-label">Site Web</label>
-            <input class="form-control" type="text" placeholder="URL du site web" id="example-text-input"
-                   name="siteWebPart" formControlName="siteWebPart">
-          </div>
-          <div class="form-group">
-            <label class="form-control-label">Logo du Partenaire</label> <br>
-            <input type="file" placeholder="Logo" name="logoPart" formControlName="logoPart">
-          </div>
-          <div class="form-group">
-            <label class="form-control-label">Partenariat Actif</label>
-            <br>
-            <label class="custom-toggle">
-              <input type="checkbox" checked="" name="actif" formControlName="actif">
-              <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
-            </label>
-          </div>
-          <div>
-            <button class="btn" id="btnColor2" type="submit" (click)="ajoutPartenaire()">
-                Enregistrer
-            </button>
-            <button aria-label="Close" class="btn btn-secondary" type="button" (click)="c('Close click')">Annuler</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </ng-template>
 
-
-
-  <!-- MA LISTE DE DONNEES -->  
+  <!-- ENTETE -->  
 
 <div class=" header bg-danger pb-6" id="bg-navbar-main">
     <div class=" container-fluid">
@@ -64,7 +12,7 @@
               aria-label="breadcrumb"
               class=" d-none d-md-inline-block ml-md-4"
             >
-              <ol class=" breadcrumb breadcrumb-links breadcrumb-dark">
+              <!-- <ol class=" breadcrumb breadcrumb-links breadcrumb-dark">
                 <li class=" breadcrumb-item">
                   <a href="javascript:void(0)"> <i class=" fas fa-home"> </i> </a>
                 </li>
@@ -76,7 +24,7 @@
                 <li aria-current="page" class=" breadcrumb-item active">
                   partenaires
                 </li>
-              </ol>
+              </ol> -->
             </nav>
           </div>
   
@@ -84,16 +32,13 @@
             <a class=" btn btn-sl " id ="btnColor2" (click)="open(classicPartenaire)"> 
                 <i class="ni ni-fat-add"></i> Add Partenaire 
             </a>
-  
-            <!-- <a class=" btn btn-sm btn-neutral" href="javascript:void(0)">
-              Filters
-            </a> -->
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+
+  <!-- MA LISTE DE DONNEE -->
   <div class=" container-fluid mt--6">
     <div class=" row">
       <div class=" col">
@@ -105,6 +50,7 @@
           <div class=" table-responsive" id="first-list">
             <table class=" table align-items-center table-flush">
               <thead class=" thead-light">
+                <!-- HEADER TABLES -->
                 <tr>
                   <th class=" sort" data-sort="logoPart" scope="col">Logo</th>
   
@@ -114,50 +60,45 @@
 
                   <th class=" sort" data-sort="siteWebPart" scope="col"> Site Web  </th>
 
-  
-  
                   <th class=" sort" data-sort="actif" scope="col"> Partenariat Actif </th>
   
-                  <th scope="col" colspan="2">Actions</th>
+                  <th scope="col" colspan="2">Operations</th>
                 </tr>
               </thead>
-  
+              <!-- BODY TABLES -->
               <tbody class=" list">
-                    <tr *ngFor="let partenaire of partenaires">
+                    <tr *ngFor="let partenaires of partenaires">
 
                         <th scope="row">
                             <div class=" media align-items-center">
                             
-                               <a [href]="partenaire.siteWebPart" target="_blank">
+                               <a [href]="partenaires.siteWebPart" target="_blank">
                                 <img  class=" avatar rounded-circle mr-3" 
-                                [src]="partenaire.logoPart" alt="Logo"
+                                [src]="partenaires.logoPart" alt="Logo"
                             />
                                </a>
                                     
                             </div>
                             
                         </th>
-                        <td> {{partenaire.nomPart}} </td>
+                        <td> <b>{{partenaires.nomPart}}</b> </td>
                         
-                        <td> {{partenaire.descriptionPart}} </td>
+                        <td> {{partenaires.descriptionPart}} </td>
 
-                        <td> <a [href]="partenaire.siteWebPart" target="_blank" >{{partenaire.siteWebPart}}</a> </td>
+                        <td> <a [href]="partenaires.siteWebPart" target="_blank" >{{partenaires.siteWebPart}}</a> </td>
 
-                        <td [ngStyle]="{'text-align':'center','color': partenaire.actif ? 'green' : 'red'}">
-                            {{ partenaire.actif ? 'oui' : 'non' }}
+                        <td [ngStyle]="{'text-align':'center','color': partenaires.actif ? 'green' : 'red'}">
+                            {{ partenaires.actif ? 'oui' : 'non' }}
                           </td>
 
                           <td>
                             <i class="fas fa-pencil-alt solid text-success" 
                             style="cursor: pointer;" 
-                            (click)="openEditPartenaire(editPartenaire,partenaire.id)"></i>
-                          </td>
-                          
-                        <td>
-                        
-                            <i class="fas fa-trash-alt text-danger" style="cursor: pointer;" (click)="deletePartenaire(partenaire)"></i>
-
-                        </td>
+                            (click)="openEditModal(modalEditPartenaire,partenaires)"></i>
+                          </td>                         
+                        <td>                        
+                            <i class="fas fa-trash-alt text-danger" style="cursor: pointer;" (click)="deletePartenaire(partenaires)"></i>
+                       </td>
                     </tr>
                 </tbody>
               </table>
@@ -167,20 +108,89 @@
       </div>
     </div>
 
+<!-- ==================================================================================== -->
+
+<!-- MON FORMULAIRE -->
+<ng-template #classicPartenaire let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h6 class="modal-title " id="modal-title-default" >Ajouter un nouveau Partenaire à LASHU</h6>
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="d('Cross click')">
+        <span aria-hidden="true" style="color: white;"> × </span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="partenaireForm" >
+          <div class="form-group">
+          <label for="example-text-input" class="form-control-label">Nom Partenaire</label>
+          <input class="form-control" type="text" placeholder="Nom partenaire" 
+                 formControlName="nomPart">
+        </div>
+           
+        <div class="form-group">
+          <label for="example-search-input" class="form-control-label">Description</label>
+          <textarea class="form-control" placeholder="Description" formControlName="descriptionPart" rows="4"></textarea>
+      </div>
+      
+      
+        <div class="form-group">
+          <label for="example-email-input" class="form-control-label">Site Web</label>
+          <input class="form-control" type="text" placeholder="URL du site web" 
+                formControlName="siteWebPart">
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label">Logo du Partenaire</label> <br>
+          <input 
+            type="file" 
+            placeholder="Logo"  
+            formControlName="logoPart"
+            
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            >
+            <!-- [(ngModel)]="activeRow.logoPart" -->
+        </div> 
+
+         <div class="form-group">
+          <label class="form-control-label">Partenariat Actif</label>
+          <br>
+          <label class="custom-toggle">
+            <input type="checkbox" checked="" formControlName="actif">
+            <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
+          </label>
+        </div>
+
+        <div>
+          <button class="btn" id="btnColor2" type="submit" (click)="ajoutPartenaire()">
+              Enregistrer
+          </button>
+          <button aria-label="Close" class="btn btn-secondary" type="button" (click)="c('Close click')">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+<!-- ============================================================================================== -->
+
 
 <!-- MODAL POUR EDITER -->
 <!-- Mon formulaire d'édition -->
 
-<ng-template #editPartenaire let-c="close" let-d="dismiss">
+ <ng-template #modalEditPartenaire let-c="close" let-d="dismiss">
     <div class="modal-content">
       <div class="modal-header">
         <h6 class="modal-title">Édition du Partenaire</h6>
-        <button type="button" class="close" aria-label="Close" (click)="c()">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="d('Cross click')">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="partenaireForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="partenaireForm" >
           <div class="form-group">
             <label for="nomPart">Nom Partenaire</label>
             <input type="text" class="form-control" id="nomPart" formControlName="nomPart">
@@ -212,7 +222,7 @@
             </label>
           </div>
 
-          <button class="btn" id="btnColor2" type="submit" > Modifier </button>
+          <button class="btn" id="btnColor2" type="submit" (click)="modifierPartenaire()"> Modifier </button>
 
           <button aria-label="Close" class="btn btn-secondary" type="button" (click)="c('Close click')">
             Annuler
@@ -222,4 +232,3 @@
       </div>
     </div>
   </ng-template>
-  
