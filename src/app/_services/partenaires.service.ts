@@ -9,7 +9,7 @@ import { Partenaires } from '../_modèles/partenaires';
 })
 export class PartenairesService {
 
-  private apiUrl = `http://localhost:4002/partenaires`;
+  private apiUrl = `http://localhost:8002/partenaires`;
 
   constructor(private http: HttpClient) { }
   headers = new HttpHeaders({

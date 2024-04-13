@@ -8,7 +8,7 @@ export enum SelectionType {
   multi = "multi",
   multiClick = "multiClick",
   cell = "cell",
-  checkbox = "checkbox",
+  checkbox = "checkbox"
 }
 @Component({
   selector: 'app-list-articles',
@@ -25,11 +25,10 @@ export class ListArticlesComponent implements OnInit{
   formBuilder : FormBuilder;
   Articles = [];
   SelectionType = SelectionType;
+  myForm:FormGroup;
 
   constructor(
-    //private router: Router,
     private modalService: NgbModal,
-    //private myForm : FormGroup,
     private _articleService: ArticleService
   ) {
     // this.myForm = this.formBuilder.group({
@@ -46,7 +45,7 @@ export class ListArticlesComponent implements OnInit{
     //   visible: true,
     //   description: "",
     // });
-    this.ngOnInit();
+    // this.ngOnInit();
   }
   entriesChange($event) {
     this.entries = $event.target.value;
@@ -141,6 +140,41 @@ export class ListArticlesComponent implements OnInit{
     }
   }
   // ============================================================================
+// -------------- EDITIONS -------------- //
+// ==========================================================
+// openEditModal(contenu: any, article: any) {
+//   this.activeArticle = article; 
+//   this.myForm.value.imageCouverture = this.imageBase64;
+//   this.myForm.patchValue({
+//     id:article.idArt,
+//     titre: article.titre,
+//     typeArticle: article.typeArticle.libelle,
+//     imageCouverture: article.imageCouverture,
+//     archive: article.archive,
+//     visible: article.visible,
+//     datepub: article.datepub
+//   });
 
+//   // Ouvrir le modal
+//   this.modalService.open(contenu, { centered: true , size: 'lg' });
+// }
+// ===========================================================
+
+modifierArticle() {
+  this.myForm.value.imageCouverture = this.imageBase64;
+  this._articleService.updateArticle(this.myForm.value).subscribe({
+      next: (res) => {
+        alert("article modifié avec succès");
+        console.log(res);
+        window.location.reload();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  console.log(this.myForm.value);
+  this.myForm.reset();
+}   
 }
+
 

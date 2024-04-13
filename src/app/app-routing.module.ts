@@ -6,7 +6,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
 import { PresentationComponent } from "./pages/presentation/presentation.component";
-import { GuideAdminComponent } from "./pages/guide-admin/guide-admin.component";
 
 const routes: Routes = [
   {
@@ -37,10 +36,7 @@ const routes: Routes = [
         path: "partenaires",
         loadChildren: () => import('./pages/partenaires/partenaires.module').then(m => m.PartenairesModule)
       },
-      {
-        path: "services",
-        loadChildren: () => import('./pages/services/services.module').then(m => m.ServicesModule)
-      },
+  
       {
         path: "departement",
         loadChildren: () => import('./pages/departement/departement.module').then(m => m.DepartementModule)
@@ -49,13 +45,10 @@ const routes: Routes = [
         path: "formations",
         loadChildren: () => import('./pages/formations/formations.module').then(m => m.FormationsModule)
       },
+      
       {
         path: "organigramme",
         loadChildren: () => import('./pages/organigramme/organigramme.module').then(m => m.OrganigrammeModule)
-      },
-      {
-        path: "guideAdmin",
-        loadChildren: () => import('./pages/guide-admin/guide-admin.module').then(m => m.GuideAdminModule)
       },
       {
         path: "components",

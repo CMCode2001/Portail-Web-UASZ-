@@ -41,49 +41,31 @@ export const ROUTES: RouteInfo[] = [
       children: [
         { path: "departement", title: " Departement", type: "link" },
       ]
-    },
-    
+    }
+    ,
     {
-      path: "/formations",
+      path: "formations",
       title: "Formations",
       type: "sub",
       icontype: "ni-ui-04 text-default",
       isCollapsed: true,
       children: [
-        { path: "formations", title: "Formations", type: "link" },
+        { path: "formations", title: " Formations", type: "link" },
       ]
     },
+    
     {
-      path: "/services",
-      title: "Services",
-      type: "sub",
-      icontype: "ni-ui-04 text-default",
-      isCollapsed: true,
-      children: [
-        { path: "services", title: "Services", type: "link" },
-      ]
-    },
-    {
-      path: "/organigramme",
+      path: "organigramme",
       title: "Organigramme",
       type: "sub",
       icontype: "ni-ui-04 text-default",
       isCollapsed: true,
       children: [
-        { path: "organigramme", title: "Organigramme", type: "link" },
+        { path: "organigramme", title: "> Directions ", type: "link" },
+        { path: "compositions-directions", title: "> Composition Direction ", type: "link" },
       ]
-    }
-    // {
-    //   path: "/guideAdmin",
-    //   title: "Guide Admin",
-    //   type: "sub",
-    //   icontype: "ni-ui-04 text-secondaire",
-    //   isCollapsed: true,
-    //   children: [
-    //     { path: "guideAdmin", title: "Guide Admin", type: "link" },
-    //   ]
-    // }
-
+     }
+ 
 
 
     // {

@@ -1,0 +1,37 @@
+{
+  "directions": [
+    {
+      "id": "107",
+      "libelleDirection": "DIRECTION A",
+      "descriptionDirection": "AXE DE RECHERCHE",
+      "responsableDirection": {
+        "id": "109",
+        "nom": "MALIK",
+        "prenom": "DIOP",
+        "contact": "m.d2@gmail.com"
+      }
+    },
+    {
+      "id": "102",
+      "libelleDirection": "DISI",
+      "descriptionDirection": "Direction Informatique des Systèmes d'information",
+      "responsableDirection": {
+        "id": "106",
+        "nom": "DIATTA",
+        "prenom": "Daouda Niang",
+        "contact": "dnd@univ.zig.sn"
+      }
+    },
+    {
+      "id": "104",
+      "libelleDirection": "QSK",
+      "descriptionDirection": "KKNNS",
+      "responsableDirection": {
+        "id": "106",
+        "nom": "",
+        "prenom": "",
+        "contact": ""
+      }
+    }
+  ]
+}

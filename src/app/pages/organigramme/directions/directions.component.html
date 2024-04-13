@@ -4,13 +4,13 @@
       <div class=" header-body">
         <div class=" row align-items-center py-4">
           <div class=" col-lg-6 col-7">
-            <h3 class=" h2 text-white d-inline-block mb-0">  Liste des Formations  </h3>
+            <h3 class=" h2 text-white d-inline-block mb-0">  Administrer l'Organigramme  </h3>
           </div>
           <div class=" col-lg-6 col-5 text-right">
-            <a class=" btn btn-sl " id ="btnColor2" (click)="openModalFormaion(addFormation)"
+            <a class=" btn btn-sl " id ="btnColor2" (click)="openModalDirection(addDirection)"
             > 
                 <i class="ni ni-fat-add"></i> 
-                 Add New Formation
+                 Add New Direction
                  
             </a>
           </div>  
@@ -20,32 +20,40 @@
   </div>
 
 <!-- ============================================================ -->
-<ng-template #addFormation let-c="close" let-d="dismiss">
+<ng-template #addDirection let-c="close" let-d="dismiss">
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title" id="modal-title-default">Ajouter une nouvelle Formation à LASHU</h6>
+        <h6 class="modal-title" id="modal-title-default">Ajouter une nouvelle Direction à LASHU</h6>
         <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="d('Cross click')">
           <span aria-hidden="true" style="color: white;">×</span>
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="myForm" (ngSubmit)="ajouterFormation()">
+        <form [formGroup]="myForm" (ngSubmit)="ajouterDirection()">
           <div class="form-group">
-            <label for="libelleForm">Nom de la Formation</label>
-            <input formControlName="libelleForm" class="form-control" placeholder="Nom de la formation" type="text">
+            <label for="libelleDirection">Nom de la Direction</label>
+            <input formControlName="libelleDirection" class="form-control" placeholder="nom de la direction" type="text">
           </div>
           <div class="form-group">
-            <label for="descriptionForm">Description de la Formation</label>
-            <textarea formControlName="descriptionForm" class="form-control" placeholder="Description" rows="5"></textarea>
+            <label for="descriptionDirection">Description de la Direction</label>
+            <textarea formControlName="descriptionDirection" class="form-control" placeholder="description" rows="2"></textarea>
           </div>
           <div class="form-group">
-            <label for="departementSelect">Ajouter à un Département</label>
-            <select formControlName="departementId" class="form-control">
-              <option *ngFor="let departement of Departements" [value]="departement.id">{{ departement.libelleDept }}</option>
-            </select>
-          </div>
+            <label for="prenom">Prénom du responsable</label>
+            <input formControlName="prenom" class="form-control" placeholder="prenom responsable" type="text">
+        </div>
+        <div class="form-group">
+            <label for="nom">Nom du responsable</label>
+            <input formControlName="nom" class="form-control" placeholder="nom responsable" type="text">
+        </div>
+        <div class="form-group">
+            <label for="contact">Contact du responsable</label>
+            <input formControlName="contact" class="form-control" placeholder="email responsable" type="email">
+        </div>
+        
+  
           <div class="d-flex justify-content-between">
-            <button class="btn " id="btnColor2" type="submit">Enregistrer</button>
+            <button class="btn" id="btnColor2" type="submit">Enregistrer</button>
             <button class="btn btn-danger" type="button" (click)="d('Cross click')">Annuler</button>
           </div>
         </form>
@@ -54,43 +62,7 @@
   </ng-template>
   
 <!-- ============================================================ -->
-<ng-template #modifFormation let-c="close" let-d="dismiss">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h6 class="modal-title " id="modal-title-default" >Ajouter un nouvelle Formation à LASHU</h6>
-        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="d('Cross click')">
-          <span aria-hidden="true" style="color: white;"> × </span>
-        </button>
-      </div>
-      <div class="modal-body">
-            <form [formGroup]="myForm" >
-              <div class="form-group ">
-                <h4 for="example-text-input"> Nom Formation </h4>
-                    <input
-                      formControlName="libelleForm"
-                      class="form-control"
-                      placeholder="nom formation"
-                      type="text">
-              </div>
-                
-              <div class="form-group" >
-                <h4 for="example-search-input" >Description Formation</h4>
-                <textarea 
-                    class="form-control" 
-                    placeholder="Description" 
-                    formControlName="descriptionForm" 
-                    rows="3">
-                </textarea>
-              </div>
-        
-              <div class="d-flex justify-content-between">
-                    <button class="btn" id="btnColor2" type="submit" (click)="modifierFormation()"> Enregistrer </button>
-                    <button class="btn btn-danger text-center" (click)="d('Cross click')"> Annuler </button>
-              </div>
-            </form>
-    </div>
-  </div>
-  </ng-template>
+
 <!-- ============================================================ -->
 
 <!-- MA LISTE DATATABLE -->
@@ -131,7 +103,7 @@
                                     <input
                                         type="search"
                                         class="form-control form-control-sm"
-                                        placeholder="Rechercher une formation"
+                                        placeholder="Rechercher une direction"
                                         aria-controls="datatable"
                                         (keyup)="filterTable($event)" />
                                 </label>
@@ -159,14 +131,15 @@
                                 </ngx-datatable-column> -->
 
                                 <ngx-datatable-column
-                                    name="libelleForm"
+                                    name="libelleDirection"
                                     [width]="400">
                                 </ngx-datatable-column>
 
                                 <ngx-datatable-column
-                                    name=" descriptionForm"
-                                    [width]="500">
+                                    name=" descriptionDirection"
+                                    [width]="300">
                                 </ngx-datatable-column>
+                                  
 
                                 <ngx-datatable-column
                                     name="Opérations"
@@ -184,26 +157,27 @@
                                         &nbsp;                                            
                                         <i class="fas fa-trash-alt text-danger" 
                                         style="cursor: pointer;"
-                                        (click)="suppressionFormation(row.id)"></i> 
+                                        (click)="suppressionDirection(row.id)"></i> 
                                                                                   
                                     </ng-template>
                                 </ngx-datatable-column>
 
-                                <!-- <ngx-datatable-column
-                                    name="Details"
-                                    [width]="1500"
-                                    [sortable]="false"
-                                    [canAutoResize]="false"
-                                    [resizeable]="false">
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <button 
-                                        class="btn btn-sm" 
-                                        id="btnColor2"  
-                                        (click)="openDetailsModal(detailsModal, row)">
-                                            Détails
-                                        </button>
-                                    </ng-template>
-                                </ngx-datatable-column> -->
+                                <ngx-datatable-column
+                                name="Details"
+                                [width]="200"
+                                [sortable]="false"
+                                [canAutoResize]="false"
+                                [resizeable]="false">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <button 
+                                    class="btn btn-sm" 
+                                    id="btnColor2"  
+                                    (click)="openDetailsModal(detailsModal, row)">
+                                        Détails
+                                    </button>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            
 
                             </ngx-datatable>
                         </div>
@@ -215,6 +189,69 @@
       
 
 <!-- ===================================================== -->
+<!-- Modal de détail -->
 <!-- MON MODAL DE DETAIL -->
-
+<ng-template #detailsModal let-c="close" let-d="dismiss">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title" style="color: white;">Détails de la Direction</h6>
+            <button aria-label="Close" class="close" type="button" (click)="c('Cross click')">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body" *ngIf="activeRow?.responsableDirection">
+            <h6 style="color: black;">Responsable de la Direction: </h6>
+             <p>
+                Nom : {{ activeRow.responsableDirection.nom }}</p>
+            <p>
+                Prénom : {{ activeRow.responsableDirection.prenom }}</p>
+            <p>
+                Contact : {{ activeRow.responsableDirection.contact }}</p>               
+            </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+        </div>
+    </div>
+</ng-template>
+  
 <!-- ==================================================== -->
+<ng-template #addDirection let-c="close" let-d="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="modal-title-default">Ajouter une nouvelle Direction à LASHU</h6>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="d('Cross click')">
+          <span aria-hidden="true" style="color: white;">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="myForm" (ngSubmit)="ajouterDirection()">
+          <div class="form-group">
+            <label for="libelleDirection">Nom de la Direction</label>
+            <input formControlName="libelleDirection" class="form-control" placeholder="nom de la direction" type="text">
+          </div>
+          <div class="form-group">
+            <label for="descriptionDirection">Description de la Direction</label>
+            <textarea formControlName="descriptionDirection" class="form-control" placeholder="description" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="prenom">Prénom du responsable</label>
+            <input formControlName="prenom" class="form-control" placeholder="prenom responsable" type="text">
+        </div>
+        <div class="form-group">
+            <label for="nom">Nom du responsable</label>
+            <input formControlName="nom" class="form-control" placeholder="nom responsable" type="text">
+        </div>
+        <div class="form-group">
+            <label for="contact">Contact du responsable</label>
+            <input formControlName="contact" class="form-control" placeholder="email responsable" type="email">
+        </div>
+        
+  
+          <div class="d-flex justify-content-between">
+            <button class="btn" id="btnColor2" type="submit">Modifier</button>
+            <button class="btn btn-danger" type="button" (click)="d('Cross click')">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ng-template>

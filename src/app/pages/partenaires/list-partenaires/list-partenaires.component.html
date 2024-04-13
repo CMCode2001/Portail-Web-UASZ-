@@ -56,7 +56,10 @@
   
                   <th class=" sort" data-sort="nomPart "  scope="col">Nom Partenaire </th>
   
-                  <th class=" sort" data-sort="descriptionPart" scope="col"> Description </th>
+                  <th class="sort" 
+                    data-sort="descriptionPart" 
+                    scope="col" 
+                    style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;" > Description </th>
 
                   <th class=" sort" data-sort="siteWebPart" scope="col"> Site Web  </th>
 
@@ -83,7 +86,9 @@
                         </th>
                         <td> <b>{{partenaires.nomPart}}</b> </td>
                         
-                        <td> {{partenaires.descriptionPart}} </td>
+                        <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;"> 
+                          {{partenaires.descriptionPart}} 
+                        </td>
 
                         <td> <a [href]="partenaires.siteWebPart" target="_blank" >{{partenaires.siteWebPart}}</a> </td>
 

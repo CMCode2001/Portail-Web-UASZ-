@@ -21,7 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PartenairesService } from "./_services/partenaires.service";
 import { PartenairesModule } from "./pages/partenaires/partenaires.module";
 import { PartenaireComponent } from './partenaire/partenaire.component';
-import { GuideAdminComponent } from './pages/guide-admin/guide-admin.component';
+import { OrganigrammeService } from "./_services/organigramme.service";
+import { DepartementService } from "./_services/departement.service";
 
 
 @NgModule({
@@ -29,8 +30,7 @@ import { GuideAdminComponent } from './pages/guide-admin/guide-admin.component';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    PartenaireComponent,
-    GuideAdminComponent
+    PartenaireComponent
   
   ],
   imports: [
@@ -51,7 +51,7 @@ import { GuideAdminComponent } from './pages/guide-admin/guide-admin.component';
     ReactiveFormsModule,
     PartenairesModule
   ],
-  providers: [PartenairesService],
+  providers: [PartenairesService,OrganigrammeService,DepartementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,9 +7,9 @@ import { Formations } from '../_modèles/formations';
 @Injectable({
   providedIn: 'root'
 })
-export class FormationsService {
+export class ServicesService {
 
-  private apiUrl = `http://localhost:8003/formations`;
+  private apiUrl = `http://localhost:8007/services`;
 
   constructor(private http: HttpClient) { }
   headers = new HttpHeaders({
@@ -22,11 +22,11 @@ export class FormationsService {
     headers: this.headers,
   };
 
-  getFormations(): Observable<any> {
+  getAllServices(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
 
-  getFormationsByDepartement(departementId: number): Observable<any[]> {
+  getServicesByDivision(departementId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}?departementId=${departementId}`);
   }
   

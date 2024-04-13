@@ -1,5 +1,5 @@
 <!-- MON ENTETE -->
-<div class=" header bg-danger pb-6" id="bg-navbar-main">
+<div class=" header bg-danger pb-3" id="bg-navbar-main">
   <div class=" container-fluid">
     <div class=" header-body"> 
       <div class=" row align-items-center py-4">
@@ -63,7 +63,14 @@
                   rows="5">
               </textarea>
             </div>
-      
+
+            <div class="form-group">
+              <label for="direction">Assigner une Direction</label>
+              <select formControlName="direction" class="form-control">
+                <option *ngFor="let direction of Directions" [value]="direction.id">{{ direction.libelleDirection }}</option>
+              </select>
+            </div>
+
             <div class="d-flex justify-content-between">
                   <button class="btn" id="btnColor2" type="submit" (click)="ajouterDepartement()"> Enregistrer </button>
                   <button class="btn btn-danger text-center" (click)="d('Cross click')"> Annuler </button>
@@ -75,55 +82,167 @@
 
 <!-- <br/><br/> -->
 
-<!-- MA LISTE DE DONNEE -->
-<div class=" container-fluid mt--6">
+<!-- MA LISTE DATATABLE -->
+<div class=" container-fluid ">
   <div class=" row">
-    <div class=" col">
-      <div class=" card">
-        <div class=" card-header border-0">
-          <h3 class=" mb-0">Nos Départements</h3>
-        </div>
+              <div class="dataTables_wrapper py-4">
+                  <div class="row">
+                      <div class="col-sm-12 col-md-6">
+                          <div class="dataTables_length"
+                              id="datatable_length">
+                              <label style="color: black;">
+                                  Afficher les
+                                  <select
+                                      name="datatable_length"
+                                      aria-controls="datatable"
+                                      class="form-control form-control-sm"
+                                      (change)="entriesChange($event)">
+                                      <option value="5"
+                                          [selected]="entries==5">5</option>
+                                      <option value="10"
+                                          [selected]="entries==10">10</option>
+                                      <option value="25"
+                                          [selected]="entries==25">25</option>
+                                      <option value="50"
+                                          [selected]="entries==50">50</option>
+                                      <option value="-1"
+                                          [selected]="entries==-1">All</option>
+                                  </select>
+                                  premieres
+                              </label>
+                          </div>
+                      </div>
+                      <div >
+                          <!-- class="col-sm-12 col-md-6" -->
+                          <div id="datatable_filter"
+                              class="dataTables_filter">
+                              <label>
+                                  <input
+                                      type="search"
+                                      class="form-control form-control-sm"
+                                      placeholder="Rechercher un departement"
+                                      aria-controls="datatable"
+                                      (keyup)="filterTable($event)" />
+                              </label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div >
+                          <ngx-datatable 
+                              id=" my-datatable"
+                              class="bootstrap selection-cell "
+                              [headerHeight]="'auto'"
+                              [style]="'color:green'"
+                              [footerHeight]="'auto'"
+                              [rowHeight]="'auto'"
+                              [columnMode]="'standard'"
+                              (activate)="onActivate"
+                              [limit]="entries != -1 ? entries:undefined"
+                              [rows]="temp"
+                              >
 
-        <div class=" table-responsive" id="first-list">
-          <table class=" table align-items-center table-flush">
-            <thead class=" thead-light">
-              <!-- HEADER TABLES -->
-              <tr>
-                
-                <th class=" sort" data-sort="nomPart "  scope="col">Nom Département </th>
+                              <!-- <ngx-datatable-column
+                                  name="id"
+                                  [width]="100">
+                              </ngx-datatable-column> -->
 
-                <th class=" sort" data-sort="descriptionPart" scope="col"> Description Département </th>
+                              <ngx-datatable-column
+                                  name="libelleDept"
+                                  [width]="400">
+                              </ngx-datatable-column>
 
-            
-                <th scope="col" colspan="3">Operations</th>
-              </tr>
-            </thead>
-            <!-- BODY TABLES -->
-            <tbody class=" list">
-                  <tr *ngFor="let departement of Departement">
-    
-                      <td> <b>{{ departement.libelleDept }}</b> </td>
-                      <td> <b>{{ departement.descriptionDept }}</b> </td>
+                              <ngx-datatable-column
+                                  name=" descriptionDept"
+                                  [width]="450">
+                              </ngx-datatable-column>
 
-                        <td>
-                          <i class="fas fa-pencil-alt solid text-success" 
-                          style="cursor: pointer;" 
-                          (click)="openEditModal(editDept, departement)"
-                          ></i>
-                        </td>                         
-                      <td>                        
-                          <i class="fas fa-trash-alt text-danger" 
-                          style="cursor: pointer;" 
-                          (click)="suppressionDepartement(departement)"></i>
-                     </td>
-                  </tr>
-              </tbody>
-            </table>
+                              <ngx-datatable-column
+                                  name="Opérations"
+                                  [width]="150"
+                                  [sortable]="false"
+                                  [canAutoResize]="false"
+                                  [resizeable]="false">
+                                  <ng-template let-row="row" ngx-datatable-cell-template>
+
+                                      <i class="fas fa-pencil-alt solid text-success" 
+                                      style="cursor: pointer;"
+                                      (click)="openEditModal(editDept ,row)"></i> 
+                                      &nbsp;                                            
+                                      &nbsp;                                            
+                                      &nbsp;                                            
+                                      <i class="fas fa-trash-alt text-danger" 
+                                      style="cursor: pointer;"
+                                      (click)="suppressionDepartement(row.id)"></i> 
+                                                                                
+                                  </ng-template>
+                              </ngx-datatable-column>
+
+                              <ngx-datatable-column
+                                  name="Details"
+                                  [width]="150"
+                                  [sortable]="false"
+                                  [canAutoResize]="false"
+                                  [resizeable]="false">
+                                  <ng-template let-row="row" ngx-datatable-cell-template>
+                                      <button 
+                                      class="btn btn-sm" 
+                                      id="btnColor2"  
+                                      (click)="openDetailsModal(detailsModal, row.id)">
+                                          Détails
+                                      </button>
+                                  </ng-template>
+                              </ngx-datatable-column>
+
+                          </ngx-datatable>
+                      </div>
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
+
+<!-- ===================================================== -->
+<ng-template #detailsModal let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h6 class="modal-title" style="color: white;">Formations Assignées au Département</h6>
+      <button aria-label="Close" class="close" type="button" (click)="d('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <ul *ngIf="Formations.length > 0">
+        <li *ngFor="let formation of Formations; let i = index">
+          <h6 style="color: black;">Nom Formation {{ i + 1 }} :</h6> 
+          <p> <b> {{ formation.libelleForm }} </b> </p> 
+
+          <h6 style="color: black;">Descriptif :<br/>
+            <p>{{ formation.descriptionForm }}</p>
+          </h6>
+
+          <h6 style="color: black;">Direction :</h6> 
+    <p *ngIf="selectedDepartementDirection">
+      <b> {{ selectedDepartementDirection.libelleDirection }} </b> 
+    </p>
+    <p *ngIf="!selectedDepartementDirection">
+      Aucune direction n'est assignée à ce département.
+    </p>
+
+          
+        </li>
+      </ul>
+      <p *ngIf="Formations.length === 0">Aucune formation assignée à ce département.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
     </div>
   </div>
+</ng-template>
+
+
+
+
+<!-- ===================================================== -->
 
   <!-- ---------------- FORMULAIRE D'EDITION  --------------------->
   <ng-template #editDept let-c="close" let-d="dismiss">
@@ -157,7 +276,7 @@
         
               <div class="d-flex justify-content-between">
                     <button class="btn" id="btnColor2" type="submit" (click)="modifierDepartement()"> Modifier </button>
-                    <button class="btn btn-danger text-center" > Annuler </button>
+                    <button class="btn btn-danger text-center" (click)="c('Close click')" > Annuler </button>
               </div>
             </form>
     </div>

@@ -1,14 +1,46 @@
 {
   "formations": [
     {
-      "id": "2",
-      "libelleFormation": "LM",
-      "descriptionFormation": "Lettres Modernes"
+      "id": "109",
+      "libelleForm": "Civilisation Africaine",
+      "descriptionForm": " Civilisation Africaine est une formation du département Histoire",
+      "departementId": "105"
+    },
+    {
+      "id": "104",
+      "libelleForm": "Langue et Lettre",
+      "descriptionForm": "Formation en Langue et Lettre",
+      "departementId": "104"
+    },
+    {
+      "id": "108",
+      "libelleForm": "LEA",
+      "descriptionForm": "Ledit formation en Langue étrangère appliquée",
+      "departementId": "104"
+    },
+    {
+      "id": "108",
+      "libelleForm": "CMC",
+      "descriptionForm": "Formation en Connaissance du Monde Contemporain ",
+      "departementId": "105"
+    },
+    {
+      "id": "109",
+      "libelleForm": "Connaissance Linguistique ",
+      "descriptionForm": "Formation en Connaissance Linguistique ",
+      "departementId": "102"
+    },
+    {
+      "id": "107",
+      "libelleForm": "LM",
+      "descriptionForm": "Formation en Lettre Moderne",
+      "departementId": "102"
     },
     {
       "id": "106",
-      "libelleFormation": "",
-      "descriptionFormation": ""
+      "libelleForm": "MWSJ",
+      "descriptionForm": "KKDK",
+      "departementId": "103"
     }
   ]
 }

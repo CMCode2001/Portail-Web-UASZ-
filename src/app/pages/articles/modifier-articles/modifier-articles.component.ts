@@ -12,12 +12,13 @@ import { ArticleService } from 'src/app/_services/articles.service';
 export class ModifierArticlesComponent {
   selectedImage: File | null = null;
   article: article;
+  activeArticle: any;
   myForm: FormGroup;
   valeurParDefaut: string;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private modal: NgbModal,
+    private modalService: NgbModal,
 
     private _articleService: ArticleService
   ) {
@@ -37,6 +38,12 @@ export class ModifierArticlesComponent {
     });
   }
 
+  onActivate(event) {
+    if (event.type === "click") {
+      this.activeArticle = event.row;    
+    }
+  }
+  
   // ==================RESOLUTION IMAGE========================//
  imageBase64: string | ArrayBuffer | null = null;
 
@@ -51,8 +58,23 @@ export class ModifierArticlesComponent {
     reader.readAsDataURL(file);
   }
 
-  // ==========================================================
-
+// ==========================================================
+openEditModal(contenu: any, article: any) {
+    this.activeArticle = article; 
+    this.myForm.value.imageCouverture = this.imageBase64;
+    this.myForm.patchValue({
+      id:article.idArt,
+      titre: article.titre,
+      typeArticle: article.typeArticle.libelle,
+      imageCouverture: article.imageCouverture,
+      archive: article.archive,
+      visible: article.visible,
+      datepub: article.datepub
+    });
+  
+    // Ouvrir le modal
+    this.modalService.open(contenu, { centered: true , size: 'lg' });
+}
 // ===========================================================
 
   modifierArticle() {

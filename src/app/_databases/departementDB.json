@@ -6,19 +6,33 @@
       "descriptionDept": "Département d' Histoire responsable de la promotion des arts et civilisations de l'Afrique."
     },
     {
-      "id": "102",
-      "libelleDept": "Lettres Modernes",
-      "descriptionDept": "Département Lettres Modernes"
+      "id": "104",
+      "libelleDept": "LANGUE ÉTRANGÈRE APPLIQUÉE ",
+      "descriptionDept": "DÉPARTEMENT LANGUE ÉTRANGÈRE APPLIQUÉE "
+    },
+    {
+      "id": "100",
+      "libelleDept": "Graphisme et Art Plastique ",
+      "descriptionDept": "Graphisme et Art Plastique "
     },
     {
       "id": "102",
-      "libelleDept": "Histoire",
-      "descriptionDept": "Département Histoire"
+      "libelleDept": "LM",
+      "descriptionDept": "DEPARTEMEMENT LETTRE MODERNE"
     },
     {
-      "id": "102",
-      "libelleDept": "Langue Étrangère Appliquée ",
-      "descriptionDept": "Département Langue Étrangère Appliquée "
+      "id": "105",
+      "libelleDept": "IT Langue ",
+      "descriptionDept": "New Departement IT Langue ",
+      "direction": "102",
+      "directionId": "102"
+    },
+    {
+      "id": "103",
+      "libelleDept": "SINSI",
+      "descriptionDept": "IEIIIIX",
+      "direction": "104",
+      "directionId": "104"
     }
   ]
 }
